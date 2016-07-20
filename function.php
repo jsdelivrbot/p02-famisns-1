@@ -585,11 +585,11 @@ if(!$rs7){
 $row7 = mysql_fetch_array($rs7);
 if($row7['COUNT']!=0 && $row7['U_IMAGE']!=NULL){
 ?>
-	<a href="<?=FAMISNS_ROOT ?>/mypage/<?= $row7['U_IMAGE'] ?>" class="thumbnail"><img src="<?=FAMISNS_ROOT ?>/mypage/<?= $row7['U_IMAGE']?>"></a>
+	<a href="<?=FAMISNS_ROOT ?>/mypage/<?= $row7['U_IMAGE'] ?>" class="thumbnail"><img src="<?=FAMISNS_ROOT ?>/mypage/<?= $row7['U_IMAGE']?>" height=100></a>
 <?php
 }else{
 ?>
-	<a href="<?=FAMISNS_ROOT ?>img/sample1.png" class="thumbnail"><img src="<?=FAMISNS_ROOT ?>/img/sample1.png"></a>
+	<a href="<?=FAMISNS_ROOT ?>img/sample1.png" class="thumbnail"><img src="<?=FAMISNS_ROOT ?>/img/sample1.png" height=100></a>
 <?php
 }
 }

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
--- ホスト: 127.0.0.1
--- 生成日時: 2016 年 6 月 04 日 00:40
--- サーバのバージョン: 5.5.27
--- PHP のバージョン: 5.4.7
+-- ホスト: localhost
+-- 生成時間: 2016 年 7 月 20 日 07:08
+-- サーバのバージョン: 5.5.8
+-- PHP のバージョン: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -37,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `tb_album` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- テーブルのデータのダンプ `tb_album`
+-- テーブルのデータをダンプしています `tb_album`
 --
 
 INSERT INTO `tb_album` (`ALBUM_ID`, `USER_ID`, `AL_TITLE`, `AL_DETAIL`, `IMAGE`, `AL_POSTTIME`) VALUES
@@ -62,6 +61,11 @@ CREATE TABLE IF NOT EXISTS `tb_answernote` (
   KEY `NOTE_ID` (`NOTE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- テーブルのデータをダンプしています `tb_answernote`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -71,62 +75,64 @@ CREATE TABLE IF NOT EXISTS `tb_answernote` (
 CREATE TABLE IF NOT EXISTS `tb_area` (
   `AREA_ID` varchar(16) NOT NULL,
   `AREA_NAME` varchar(32) DEFAULT NULL,
+  `USER_ID` varchar(32) NOT NULL,
+  `EMERGENCY` int(11) NOT NULL,
   PRIMARY KEY (`AREA_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_area`
+-- テーブルのデータをダンプしています `tb_area`
 --
 
-INSERT INTO `tb_area` (`AREA_ID`, `AREA_NAME`) VALUES
-('admin', 'admin'),
-('area1', '北海道'),
-('area10', '群馬県'),
-('area11', '埼玉県'),
-('area12', '千葉県'),
-('area13', '東京都'),
-('area14', '神奈川県'),
-('area15', '新潟県'),
-('area16', '富山県'),
-('area17', '石川県'),
-('area18', '福井県'),
-('area19', '山梨県'),
-('area2', '青森県'),
-('area20', '長野県'),
-('area21', '岐阜県'),
-('area22', '静岡県'),
-('area23', '愛知県'),
-('area24', '三重県'),
-('area25', '滋賀県'),
-('area26', '京都府'),
-('area27', '大阪府'),
-('area28', '兵庫県'),
-('area29', '奈良県'),
-('area3', '岩手県'),
-('area30', '和歌山県'),
-('area31', '鳥取県'),
-('area32', '島根県'),
-('area33', '岡山県'),
-('area34', '広島県'),
-('area35', '山口県'),
-('area36', '徳島県'),
-('area37', '香川県'),
-('area38', '愛媛県'),
-('area39', '高知県'),
-('area4', '宮城県'),
-('area40', '福岡県'),
-('area41', '佐賀県'),
-('area42', '長崎県'),
-('area43', '熊本県'),
-('area44', '大分県'),
-('area45', '宮崎県'),
-('area46', '鹿児島県'),
-('area47', '沖縄県'),
-('area5', '秋田県'),
-('area6', '山形県'),
-('area7', '福島県'),
-('area8', '茨城県'),
-('area9', '栃木県');
+INSERT INTO `tb_area` (`AREA_ID`, `AREA_NAME`, `USER_ID`, `EMERGENCY`) VALUES
+('admin', 'admin', '', 0),
+('area1', '福岡市東区松香台', 'matuka', 1),
+('area10', '群馬県', '', 0),
+('area11', '埼玉県', '', 0),
+('area12', '千葉県', '', 0),
+('area13', '東京都', '', 0),
+('area14', '神奈川県', '', 0),
+('area15', '新潟県', '', 0),
+('area16', '富山県', '', 0),
+('area17', '石川県', '', 0),
+('area18', '福井県', '', 0),
+('area19', '山梨県', '', 0),
+('area2', '青森県', '', 0),
+('area20', '長野県', '', 0),
+('area21', '岐阜県', '', 0),
+('area22', '静岡県', '', 0),
+('area23', '愛知県', '', 0),
+('area24', '三重県', '', 0),
+('area25', '滋賀県', '', 0),
+('area26', '京都府', '', 0),
+('area27', '大阪府', '', 0),
+('area28', '兵庫県', '', 0),
+('area29', '奈良県', '', 0),
+('area3', '岩手県', '', 0),
+('area30', '和歌山県', '', 0),
+('area31', '鳥取県', '', 0),
+('area32', '島根県', '', 0),
+('area33', '岡山県', '', 0),
+('area34', '広島県', '', 0),
+('area35', '山口県', '', 0),
+('area36', '徳島県', '', 0),
+('area37', '香川県', '', 0),
+('area38', '愛媛県', '', 0),
+('area39', '高知県', '', 0),
+('area4', '宮城県', '', 0),
+('area40', '福岡県', '', 0),
+('area41', '佐賀県', '', 0),
+('area42', '長崎県', '', 0),
+('area43', '熊本県', '', 0),
+('area44', '大分県', '', 0),
+('area45', '宮崎県', '', 0),
+('area46', '鹿児島県', '', 0),
+('area47', '沖縄県', '', 0),
+('area5', '秋田県', '', 0),
+('area6', '山形県', '', 0),
+('area7', '福島県', '', 0),
+('area8', '茨城県', '', 0),
+('area9', '栃木県', '', 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `tb_areaivent` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
--- テーブルのデータのダンプ `tb_areaivent`
+-- テーブルのデータをダンプしています `tb_areaivent`
 --
 
 INSERT INTO `tb_areaivent` (`AREA_ID`, `USER_ID`, `AIVENT_ID`, `AI_TITLE`, `AI_PLACE`, `AI_DATETIME`, `AI_DETAIL`, `AI_POSTTIME`) VALUES
@@ -177,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `tb_comment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
--- テーブルのデータのダンプ `tb_comment`
+-- テーブルのデータをダンプしています `tb_comment`
 --
 
 INSERT INTO `tb_comment` (`USER_ID`, `CTARGET_ID`, `COMMMENT_ID`, `C_DETAIL`, `C_POSTTIME`, `TARGETNUM_ID`) VALUES
@@ -205,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `tb_commenttarget` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_commenttarget`
+-- テーブルのデータをダンプしています `tb_commenttarget`
 --
 
 INSERT INTO `tb_commenttarget` (`CTARGET_ID`, `CT_NAME`) VALUES
@@ -227,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `tb_condition` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_condition`
+-- テーブルのデータをダンプしています `tb_condition`
 --
 
 INSERT INTO `tb_condition` (`CONDITION_ID`, `CONDITIONNAME`) VALUES
@@ -251,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `tb_demand` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- テーブルのデータのダンプ `tb_demand`
+-- テーブルのデータをダンプしています `tb_demand`
 --
 
 INSERT INTO `tb_demand` (`DEMAND_ID`, `FROM_ID`, `TO_ID`, `STATE`) VALUES
@@ -274,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `tb_diary` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- テーブルのデータのダンプ `tb_diary`
+-- テーブルのデータをダンプしています `tb_diary`
 --
 
 INSERT INTO `tb_diary` (`USER_ID`, `DIARY_ID`, `D_TITLE`, `D_DETAIL`, `D_POSTTIME`) VALUES
@@ -298,6 +304,11 @@ CREATE TABLE IF NOT EXISTS `tb_familychat` (
   KEY `USER_ID` (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- テーブルのデータをダンプしています `tb_familychat`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -316,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `tb_familyivent` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- テーブルのデータのダンプ `tb_familyivent`
+-- テーブルのデータをダンプしています `tb_familyivent`
 --
 
 INSERT INTO `tb_familyivent` (`HOME_ID`, `FIVENT_ID`, `FI_TITLE`, `FI_DATETIME`, `FI_DETAIL`, `FI_PLACE`) VALUES
@@ -338,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `tb_fdemand` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- テーブルのデータのダンプ `tb_fdemand`
+-- テーブルのデータをダンプしています `tb_fdemand`
 --
 
 INSERT INTO `tb_fdemand` (`FDEMAND_ID`, `FROM_UID`, `TO_UID`, `STATE`) VALUES
@@ -369,16 +380,17 @@ CREATE TABLE IF NOT EXISTS `tb_home` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_home`
+-- テーブルのデータをダンプしています `tb_home`
 --
 
 INSERT INTO `tb_home` (`AREA_ID`, `HOME_ID`, `H_NAME`, `REPRESENTATIVE_ID`, `POSTALCODE`, `PREFECTURES`, `MUNICIPALITY`, `ADDRESS`, `UNIVERSITY`, `HIGHSCHOOL`, `MIDDLESCHOOL`, `ELEMENTARYSCHOOL`, `PRESCHOOL`) VALUES
 ('admin', 'admi0', 'admin', 'admin', '', '', '', NULL, NULL, NULL, NULL, NULL, ''),
-('area40', 'home1', '松香家', 'mtk000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '松香高校', '松香中学校', '松香小学校', '松香台保育園'),
-('area40', 'home2', '田中家', 'tnk000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '松香高校', '松香中学校', '松香小学校', '松香台保育園'),
+('area1', 'home1', '松香家', 'mtk000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '松香高校', '松香中学校', '松香小学校', '松香台保育園'),
+('area1', 'home2', '田中家', 'tnk000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '松香高校', '松香中学校', '松香小学校', '松香台保育園'),
 ('area40', 'home3', '九産家', 'kyusan000', '8140180', '福岡県', '福岡市城南区七隈', NULL, '福岡大学', '福岡高校', '福岡中学校', '福岡小学校', '福岡幼稚園'),
-('area40', 'home4', '山田家', 'ymd000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '九州産業大学付属高校', '松香中学校', '松香小学校', '松香幼稚園'),
-('area40', 'home5', '伊藤家', 'ito000', '8130004', '福岡県', '福岡市東区松香台', '', '松香大学', '', '', '', '松香幼稚園');
+('area1', 'home4', '山田家', 'ymd000', '8130004', '福岡県', '福岡市東区松香台', NULL, '九州産業大学', '九州産業大学付属高校', '松香中学校', '松香小学校', '松香幼稚園'),
+('area1', 'home5', '伊藤家', 'ito000', '8130004', '福岡県', '福岡市東区松香台', '', '松香大学', '', '', '', '松香幼稚園'),
+('area1', 'home6', '松香台', 'matuka', '8191123', '福岡県', '糸島市神在374-20', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -395,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `tb_homeprof` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- テーブルのデータのダンプ `tb_homeprof`
+-- テーブルのデータをダンプしています `tb_homeprof`
 --
 
 INSERT INTO `tb_homeprof` (`HOMEPROF_ID`, `HOME_ID`, `IMAGE`, `COMMENT`) VALUES
@@ -421,13 +433,13 @@ CREATE TABLE IF NOT EXISTS `tb_housework` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- テーブルのデータのダンプ `tb_housework`
+-- テーブルのデータをダンプしています `tb_housework`
 --
 
 INSERT INTO `tb_housework` (`HOME_ID`, `HWORK_ID`, `HW_NAME`, `HW_FINISH`, `UPDATE`) VALUES
-('home1', 1, '掃除', 0, '2015-12-12 18:15:31'),
-('home1', 2, '洗濯', 0, '2015-12-16 22:53:28'),
-('home1', 3, '風呂掃除', 0, '2015-12-12 18:15:31');
+('home1', 1, '掃除', 0, '2015-12-13 03:15:31'),
+('home1', 2, '洗濯', 0, '2015-12-17 07:53:28'),
+('home1', 3, '風呂掃除', 0, '2015-12-13 03:15:31');
 
 -- --------------------------------------------------------
 
@@ -442,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `tb_kibun` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- テーブルのデータのダンプ `tb_kibun`
+-- テーブルのデータをダンプしています `tb_kibun`
 --
 
 INSERT INTO `tb_kibun` (`KIBUN_ID`, `KIBUNNAME`) VALUES
@@ -470,6 +482,11 @@ CREATE TABLE IF NOT EXISTS `tb_note` (
   KEY `USER_ID` (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- テーブルのデータをダンプしています `tb_note`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -491,12 +508,32 @@ CREATE TABLE IF NOT EXISTS `tb_post` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
--- テーブルのデータのダンプ `tb_post`
+-- テーブルのデータをダンプしています `tb_post`
 --
 
 INSERT INTO `tb_post` (`AREA_ID`, `USER_ID`, `POST_ID`, `P_TITLE`, `P_DETAIL`, `P_POSTTIME`, `IMAGE`, `SHARE`) VALUES
 ('area40', 'mtk000', 25, '旅行', 'ホテルからの夜景！', '2015-12-13 19:13:58', 'files/20151213-191358.JPG', 0),
 ('area40', 'mtk000', 26, '紅葉', '紅葉見に行ってきたよ！\r\nまだ始まったばかりで、\r\n赤くないのも結構あった。\r\nでも、きれいだったよ！', '2015-12-13 19:15:18', 'files/20151213-191518.JPG', 0);
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `tb_safetype`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_safetype` (
+  `SAFE_ID` int(11) DEFAULT NULL,
+  `SAFETYPE` varchar(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- テーブルのデータをダンプしています `tb_safetype`
+--
+
+INSERT INTO `tb_safetype` (`SAFE_ID`, `SAFETYPE`) VALUES
+(2, '無事'),
+(1, 'SOS'),
+(0, '未確認');
 
 -- --------------------------------------------------------
 
@@ -510,24 +547,26 @@ CREATE TABLE IF NOT EXISTS `tb_state` (
   `LOCATION` varchar(32) DEFAULT NULL,
   `COMMENT` varchar(32) DEFAULT NULL,
   `KIBUN_ID` int(11) DEFAULT NULL,
+  `SAFE` int(11) NOT NULL,
+  `REPORT` text NOT NULL,
   `UPDATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `CONDITION_ID` (`CONDITION_ID`),
   KEY `USER_ID` (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_state`
+-- テーブルのデータをダンプしています `tb_state`
 --
 
-INSERT INTO `tb_state` (`USER_ID`, `CONDITION_ID`, `LOCATION`, `COMMENT`, `KIBUN_ID`, `UPDATE`) VALUES
-('mtk000', 3, '九産大', '帰宅中です', 2, '2016-01-26 22:51:46'),
-('mtk001', 0, '家の近く', '買い物してます', 1, '2015-12-13 15:15:19'),
-('mtk002', 3, '家', '家にいるよー', 2, '2015-12-16 01:41:37'),
-('admin', 1, 'admin', 'システム管理者です。', 0, '2015-12-13 14:52:41'),
-('tnk000', 0, '博多', '帰宅中', 0, '2015-12-13 14:53:12'),
-('ymd000', 0, '家', 'あいうえお', 1, '2015-12-13 14:52:53'),
-('tnk001', 0, '学校', '今、学校です', 0, '2016-01-26 05:20:56'),
-('tnk002', 3, '学校', '', 1, '2016-01-26 05:16:51');
+INSERT INTO `tb_state` (`USER_ID`, `CONDITION_ID`, `LOCATION`, `COMMENT`, `KIBUN_ID`, `SAFE`, `REPORT`, `UPDATE`) VALUES
+('mtk000', 3, '九産大', '帰宅中です', 2, 2, '怪我をした', '2016-07-20 13:51:53'),
+('mtk001', 0, '家の近く', '買い物してます', 1, 2, '', '2016-07-20 13:51:55'),
+('mtk002', 0, '家', '勉強してる', 0, 1, '', '2016-07-20 14:05:25'),
+('admin', 1, 'admin', 'システム管理者です。', 0, 0, '', '2015-12-13 23:52:41'),
+('tnk000', 0, '博多', '帰宅中', 0, 0, '', '2015-12-13 23:53:12'),
+('ymd000', 0, '家', 'あいうえお', 1, 0, '', '2015-12-13 23:52:53'),
+('tnk001', 0, '学校', '今、学校です', 0, 0, '', '2016-01-26 14:20:56'),
+('tnk002', 3, '学校', '', 1, 0, '', '2016-01-26 14:16:51');
 
 -- --------------------------------------------------------
 
@@ -545,7 +584,7 @@ CREATE TABLE IF NOT EXISTS `tb_todo` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- テーブルのデータのダンプ `tb_todo`
+-- テーブルのデータをダンプしています `tb_todo`
 --
 
 INSERT INTO `tb_todo` (`USER_ID`, `TODO_ID`, `T_NAME`, `T_FINISH`) VALUES
@@ -580,20 +619,21 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_user`
+-- テーブルのデータをダンプしています `tb_user`
 --
 
 INSERT INTO `tb_user` (`HOME_ID`, `UT_ID`, `USER_ID`, `PASSWORD`, `NAME`, `SEX`, `BIRTHDAY`, `EMAIL`) VALUES
 ('admi0', 9, 'admin', 'admin', 'admin', 1, '0000-00-00', ''),
-('home5', 0, 'ito000', 'ito000', '伊藤太郎', 1, '1980-10-10', ''),
-('home3', 0, 'kyusan000', 'kyusan000', '九産太郎', 1, '1960-11-11', ''),
-('home1', 0, 'mtk000', 'mtk000', '松香太郎', 1, '1958-12-20', ''),
-('home1', 1, 'mtk001', 'mtk001', '松香花子', 0, '1960-11-11', ''),
+('home5', 1, 'ito000', 'ito000', '伊藤太郎', 1, '1980-10-10', ''),
+('home3', 1, 'kyusan000', 'kyusan000', '九産太郎', 1, '1960-11-11', ''),
+('home6', 0, 'matuka', 'abcd', '東区松香台管理者', 1, '1994-12-14', ''),
+('home1', 1, 'mtk000', 'mtk000', '松香太郎', 1, '1958-12-20', ''),
+('home1', 2, 'mtk001', 'mtk001', '松香花子', 0, '1960-11-11', ''),
 ('home1', 2, 'mtk002', 'mtk002', '松香ダイスケ', 1, '1993-11-01', ''),
-('home2', 0, 'tnk000', 'tnk000', '田中太郎', 1, '1980-10-10', ''),
+('home2', 1, 'tnk000', 'tnk000', '田中太郎', 1, '1980-10-10', ''),
 ('home2', 2, 'tnk001', 'tnk001', '田中次郎', 1, '1999-10-10', ' '),
 ('home2', 2, 'tnk002', 'tnk002', '田中三郎', 1, '1995-12-12', ' '),
-('home4', 0, 'ymd000', 'ymd000', '山田太郎', 1, '1965-12-10', '');
+('home4', 1, 'ymd000', 'ymd000', '山田太郎', 1, '1965-12-10', '');
 
 -- --------------------------------------------------------
 
@@ -611,7 +651,7 @@ CREATE TABLE IF NOT EXISTS `tb_userprof` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- テーブルのデータのダンプ `tb_userprof`
+-- テーブルのデータをダンプしています `tb_userprof`
 --
 
 INSERT INTO `tb_userprof` (`UPROF_ID`, `USER_ID`, `U_IMAGE`, `COMMENT`, `HOBBY`) VALUES
@@ -636,13 +676,13 @@ CREATE TABLE IF NOT EXISTS `tb_usertype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- テーブルのデータのダンプ `tb_usertype`
+-- テーブルのデータをダンプしています `tb_usertype`
 --
 
 INSERT INTO `tb_usertype` (`UT_ID`, `USERTYPE`) VALUES
-(0, '代表者'),
-(1, 'メンバー(親)'),
-(2, 'メンバー(子)'),
+(0, '地域代表者'),
+(1, '家族代表者'),
+(2, '家族メンバー'),
 (9, 'システム管理者');
 
 --
@@ -725,7 +765,3 @@ ALTER TABLE `tb_todo`
 ALTER TABLE `tb_user`
   ADD CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`HOME_ID`) REFERENCES `tb_home` (`HOME_ID`),
   ADD CONSTRAINT `tb_user_ibfk_2` FOREIGN KEY (`UT_ID`) REFERENCES `tb_usertype` (`UT_ID`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

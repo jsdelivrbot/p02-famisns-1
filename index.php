@@ -12,6 +12,20 @@ if(!$rs){
 	die('エラー: ' . h(mysql_error()));
 }
 
+$emergency = 0;
+if(isset($_SESSION['AID'])){
+	$aid = $_SESSION['AID'];
+	$sql = "SELECT * FROM tb_area WHERE AREA_ID='$aid'";
+	//echo $sql;
+	$rs = mysql_query($sql);
+	if(!$rs) die('エラー: ' . h(mysql_error()));
+	$row = mysql_fetch_array($rs);
+	if($row){
+		$emergency = $row['EMERGENCY'];
+	}
+}
+//echo $emergency;
+
 $query2 = "SELECT * FROM `tb_user` NATURAL JOIN tb_state NATURAL JOIN tb_condition WHERE `HOME_ID`='{$hid}' ORDER BY `USER_ID` ASC ";
 $rs2 = mysql_query($query2);
 if(!$rs2){
@@ -78,7 +92,17 @@ if($cnt2<=3){
 			      	<h4><img src="img/<?= $row2['KIBUN_ID'] ?>.png" class="img-thumbnail">
 			      	<?php echo $row2['NAME']; ?></h4>
 			      </div>
+
+			       <div class="text-center">
+			       <?php
+			        $u = $row2['USER_ID']; 
+			        if($emergency>0) echo '<a href="safe_report.php?u='.$u.'&r=1" class="btn btn-danger">SOS</a>  ';
+					if($emergency>0) echo '<a href="safe_report.php?u='.$u.'&r=2" class="btn btn-success">無 事</a>';
+			       ?>  
+			       </div>
+			       <br>
 			       <div class="col-xs-4 col-sm-12 col-md-12"><?php uimg($row2['HOME_ID'],$row2['USER_ID']); ?></div>
+			    
 			      <div class="caption">
 			        <p>現在地：
 			        <?php
@@ -99,6 +123,23 @@ if($cnt2<=3){
 			        ?>
 			        </p>
 			        <p class="text-center"><?php echo $row2['COMMENT']; ?></p>
+			        <?php
+			        //安否確認機能
+			        $icons=array('fire','user-plus','heart');//アイコンの配列
+					$colors=array('gray','red','green');//色の配列
+					$safe=array('不明','SOS','無事');
+					$report=$row2['REPORT'];
+			        $i=$row2['SAFE'];
+			        //echo $safe; 
+			        
+			        echo "<p>安否状況:". $safe[$i]. "<br>";
+			        
+			        $time=$row2['UPDATE'];
+			        //echo $time;
+					echo '<i class="fa fa-'.$icons[$i].'" style="font-size:60px;color:'.$colors[$i].'"></i>';//安否アイコン
+			        ?>
+			        <p class="well well-sm"><?php echo $report;?></p>
+			       
 			      </div>
 			    </div>
 			  </div>
@@ -119,6 +160,8 @@ if($cnt2<=3){
 			<div class="thumbnail">
 			<div class="text-center"><h4><?php echo $row['NAME'] ?></h4></div>
 				<div class="col-xs-4 col-sm-12 col-md-12"><img src="img/sample1.png" class="img-thumbnail"></div>
+
+
 				<div class="caption">
 				<p>現在地：登録なし</p>
 				<p>体調：登録なし</p>
@@ -146,6 +189,7 @@ if($cnt2<=3){
 			    <div class="thumbnail">
 			      <div class="text-center"><h4><?php echo $row4['NAME']; ?></h4></div>
 			      <div class="col-xs-4 col-sm-12 col-md-12"><?php uimg($row4['HOME_ID'],$row4['USER_ID']); ?></div>
+
 			      <div class="caption">
 			        <p>現在地：
 			        <?php
@@ -166,6 +210,7 @@ if($cnt2<=3){
 			        ?>
 			        </p>
 			        <p class="text-center"><?php echo $row4['COMMENT']; ?></p>
+
 			      </div>
 			    </div>
 			  </div>
@@ -173,6 +218,7 @@ if($cnt2<=3){
 			if($cnt==5 || $cnt==8 || $cnt==11){
 			?>
 				</div>
+
 				<div class="row">
 			<?php
 			}
@@ -182,6 +228,7 @@ if($cnt2<=3){
 		</div>
     </div>
     </div>
+
 
     <div class="col-sm-offset-3 col-sm-6 well well-sm">
     <div class="text-center"><strong>家族チャット</strong></div>

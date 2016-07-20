@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (!defined('FAMISNS_ROOT')) define('FAMISNS_ROOT','/pbs/p02-famisns');
+if (!defined('FAMISNS_ROOT')) define('FAMISNS_ROOT','/benkyou/pbs/p02-famisns');
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -12,18 +13,17 @@ if (!defined('FAMISNS_ROOT')) define('FAMISNS_ROOT','/pbs/p02-famisns');
     <!-- Bootstrap -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="xmlhttprequestcreate.js" type="text/javascript"></script>
 <script src="main.js" type="text/javascript"></script>
 <!-- Not_flat_design
     <link rel="stylesheet" href="css/bootstrap-theme.min.css" media="screen">
 -->
-
   </head>
   <body>
 
 <?php
-
 if(!isset($_SESSION['UTID'])){
 ?>
 
@@ -36,7 +36,7 @@ if(!isset($_SESSION['UTID'])){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">絆を深めるＳＮＳ</a>
+      <a class="navbar-brand">絆を深めるSNS</a>
     </div><!-- /.navbar-header -->
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -52,7 +52,7 @@ if(!isset($_SESSION['UTID'])){
   $utid = $_SESSION['UTID'];
   $hid = $_SESSION['HID'];
   $aid = $_SESSION['AID'];
-
+ // echo $aid;
 
 require_once('db_inc.php');
 
@@ -69,8 +69,15 @@ if(!$rs3){
   die('エラー: ' . h(mysql_error()));
 }
 $row3 = mysql_fetch_array($rs3);
-
 ?>
+
+
+
+<?php
+//家族代表者と家族メンバーのみのメニューを表示
+if($utid==1||$utid==2){
+?>
+
 <div class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
@@ -80,7 +87,7 @@ $row3 = mysql_fetch_array($rs3);
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">絆を深めるＳＮＳ</a>
+      <a class="navbar-brand">絆を深めるSNS</a>
     </div>
     <!-- /.navbar-header -->
     <div class="navbar-collapse collapse">
@@ -90,7 +97,7 @@ $row3 = mysql_fetch_array($rs3);
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">地域<span class="badge"><?php if($row2['COUNT']!=0){ echo $row2['COUNT'];} ?></span> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-			<li><a href="<?= FAMISNS_ROOT ?>/area/areatop.php">トップ</a></li>
+			<li><a href="<?= FAMISNS_ROOT ?>/area/areatop.php">地域トップ</a></li>
 			<li><a href="<?= FAMISNS_ROOT ?>/area/matching_list.php">ご近所さん<span class="badge"><?php if($row2['COUNT']!=0){ echo $row2['COUNT'];} ?></span></a></li>
           </ul>
         </li>
@@ -99,7 +106,7 @@ $row3 = mysql_fetch_array($rs3);
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">家族<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?= FAMISNS_ROOT ?>/index.php">トップ</a></li>
+            <li><a href="<?= FAMISNS_ROOT ?>/index.php">家族トップ</a></li>
 			<li><a href="<?= FAMISNS_ROOT ?>/family/familypage.php">家族詳細</a></li>
 			<li><a href="<?= FAMISNS_ROOT ?>/family/album.php">お茶の間</a></li>
 			<?php
@@ -114,12 +121,11 @@ $row3 = mysql_fetch_array($rs3);
           </ul>
         </li>
 
-
 		<!-- マイページ -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">マイページ<span class="badge"><?php if($row3['COUNT']!=0){ echo $row3['COUNT'];} ?></span><span class="caret"></span></a>
           <ul class="dropdown-menu">
-			<li><a href="<?= FAMISNS_ROOT ?>/mypage/mypage.php">トップ</a></li>
+			<li><a href="<?= FAMISNS_ROOT ?>/mypage/mypage.php">個人トップ</a></li>
 			<li><a href="<?= FAMISNS_ROOT ?>/mypage/user_prof.php">個人プロフ編集</a></li>
 			<li><a href="<?= FAMISNS_ROOT ?>/mypage/friend_list.php">フレンドリスト<span class="badge"><?php if($row3['COUNT']!=0){ echo $row3['COUNT'];} ?></span></a></li>
           </ul>
@@ -135,6 +141,58 @@ $row3 = mysql_fetch_array($rs3);
 </div><!-- /.navbar -->
 
 <div class="container">
+
+
+
+<?php
+//地域管理者のメニューを表示
+}else if($utid==0){
+?>
+
+<div class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">ナビゲーションの切替</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">絆を深めるSNS</a>
+    </div>
+    <!-- /.navbar-header -->
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+
+    <!-- ホーム -->
+    <li><a href="<?= FAMISNS_ROOT ?>/area/safe_count.php">
+    <span class="glyphicon glyphicon-home"></span> Home</a></li>
+
+    <!-- 地域一覧 -->
+    <li><a href="<?= FAMISNS_ROOT ?>/area/arealist.php">
+    <span class="glyphicon glyphicon-th-list"></span> 地域一覧</a></li>
+
+    <!-- 記事投稿 -->
+    <li><a href="#"><span class="glyphicon glyphicon-picture"></span> 記事投稿</a></li>
+
+    <!-- メニュー右側 -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>ようこそ！<?php echo $uname;?>さん</a></li>
+        <li><a href="<?= FAMISNS_ROOT ?>/logout.php">ログアウト</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+<div class="container">
+
+
+<?php
+}
+?>
+
 <?php
 }
 ?>
