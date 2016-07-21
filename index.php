@@ -125,7 +125,7 @@ if($cnt2<=3){
 			        <p class="text-center"><?php echo $row2['COMMENT']; ?></p>
 			        <?php
 			        //安否確認機能
-			        $icons=array('fire','user-plus','heart');//アイコンの配列
+			        $icons=array('envelope','ambulance','heart');//アイコンの配列
 					$colors=array('gray','red','green');//色の配列
 					$safe=array('不明','SOS','無事');
 					$report=$row2['REPORT'];

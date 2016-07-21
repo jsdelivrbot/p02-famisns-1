@@ -3,6 +3,15 @@ include ('../inc/header_inc.php');
 require_once('../inc/db_inc.php');
 
 $uid=$_SESSION['UID'];
+
+if(isset($_GET['s'])){
+	$s = $_GET['s'];
+	$sql = "UPDATE tb_area SET EMERGENCY=$s WHERE USER_ID='$uid'"; 
+	//echo $sql;
+	$rs = mysql_query($sql, $conn);
+}
+
+
 $sql = "SELECT * FROM tb_area WHERE USER_ID='$uid'";//
 
 $rs = mysql_query($sql, $conn);
@@ -10,18 +19,32 @@ if (!$rs) {
 	die ('エラー: ' . mysql_error());
 }
 $row = mysql_fetch_array($rs) ;
+$emergency=0;
+if($row){
+	$emergency=$row['EMERGENCY'];
+	$area_name=$row['AREA_NAME'];
+}
 
-echo '<div class="page-header text-center"><h1>地域安否状況【'.$row['AREA_NAME'].'】</h1></div>';
+
+
+echo '<div class="form-group">';
+echo '<div class="col-sm-offset-5 col-sm-12" text-right>';
+if($emergency>0){
+	echo '<a href="?s=1" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-warning"></span>緊急時</a>';
+	echo '<a href="?s=0" class="btn btn-default btn-lg">平常時</a>';
+}else{
+	echo '<a href="?s=1" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-warning"></span>緊急時</a>';
+	echo '<a href="?s=0" class="btn btn-success btn-lg">平常時</a>';
+}
+echo '<br></div></div><br>';
+
+
+
+
+echo '<div class="page-header text-center"><h1>地域安否状況【'.$area_name.'】</h1></div>';
 ?>
 
-<!--平常時・緊急時ボタン-->
-<div class="form-group">
-<div class="col-sm-offset-3 col-sm-9" text-right>
-<button class="btn btn-danger"><span class="glyphicon glyphicon-warning"></span>緊急時</button>
-<button class="btn btn-default">解除</button>
-<br>
-</div>
-</div>
+
 
 <?php
 $sql = "SELECT SAFE, COUNT( * ) as people FROM tb_state GROUP BY SAFE";//検索条件を適用したSQL文を作成
@@ -32,7 +55,7 @@ if (!$rs) {
 }
 $row = mysql_fetch_array($rs) ;
 
-$icons=array('fire','user-plus','heart');//アイコンの配列
+$icons=array('envelope','ambulance','heart');//アイコンの配列
 $colors=array('gray','red','green');//色の配列
 $count=array(0,0,0);
 while ($row) {
@@ -42,9 +65,10 @@ while ($row) {
 }
 
 for ($i=0; $i<sizeof($count);$i++) {
+	echo '<div class="col-sm-offset-1 col-sm-2">';
 	echo '<a href="safe_count.php?id='.$i.'">';
 	echo '<i class="fa fa-'.$icons[$i].'" style="font-size:150px;color:'.$colors[$i].'">';//安否アイコン
-	echo  $count[$i]. '　</i></a>';//安否アイコン
+	echo  $count[$i]. '　</i></a></div>';//安否アイコン
 	
 	$row = mysql_fetch_array($rs) ;
 }
@@ -74,9 +98,11 @@ while ($row) {
 
 }
 echo '<table>';
+
 }
 ?>
 
+</div>
 
 
 
